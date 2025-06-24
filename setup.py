@@ -28,4 +28,4 @@ for path, content in files.items():
     with open(path, "w", encoding="utf-8") as f:
         f.write(content)
 
-print("✅ Project structure created successfully!")
+print("ok!!")
