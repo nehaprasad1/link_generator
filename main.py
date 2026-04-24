@@ -3,6 +3,8 @@ from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from typing import Optional
+import os
+import uvicorn
 
 app = FastAPI()
 
@@ -42,3 +44,11 @@ async def read_home(request: Request, username: Optional[str] = None, platform: 
             "generated_link": generated_link
         }
     )
+# NEW: This block is critical for cloud deployment
+if __name__ == "__main__":
+    # Render and other clouds assign a random port via the 'PORT' environment variable.
+    # This line fetches that port. If it's missing (like on your local PC), it defaults to 8000.
+    port = int(os.environ.get("PORT", 8000))
+    
+    # We pass the dynamic 'port' variable to uvicorn so the container stays alive on the cloud.
+    uvicorn.run(app, host="0.0.0.0", port=port)
