@@ -4,27 +4,33 @@
     <title>Profile Link Generator</title>
     <link rel="stylesheet" href="/static/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans&family=VT323&display=swap" rel="stylesheet">
-
 </head>
 <body>
     <div class="form-cont">
-     <h2>Generate Your Profile Link !</h2>
-     <div class="formbox">
-   
-      <form method="GET">
-          <label for="username">Username: </label>
-          <input type="text" id="username" name="username" placeholder="nehaprasad1" />
+        <h2>Generate Your Profile Link!</h2>
+        <div class="formbox">
+            <form method="GET" action="/">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" placeholder="nehaprasad1" required>
 
-         <label for="platform">Platform: </label>
-          <input type="text" id="platform name="platform" placeholder="github">
-         
-         <button type="submit">Generate link</button>
-      </form>
-     </div>
+                <label for="platform">Platform:</label>
+                <!-- Changed to a select dropdown for better UX -->
+                <select id="platform" name="platform" style="display: block; width: 100%; margin: 20px 0; padding: 10px; font-family: 'VT323'; font-size: 25px; border-radius: 14px; border: 4px solid #e6d1e2;">
+                    <option value="github">GitHub</option>
+                    <option value="leetcode">LeetCode</option>
+                    <option value="linkedin">LinkedIn</option>
+                </select>
+                
+                <button type="submit">Generate link</button>
+            </form>
+
+            {% if generated_link %}
+            <div style="margin-top: 30px; font-size: 20px;">
+                <p>Your Link:</p>
+                <a href="{{ generated_link }}" target="_blank" style="color: #f187bc; word-break: break-all;">{{ generated_link }}</a>
+            </div>
+            {% endif %}
+        </div>
     </div>
-   
-
-    <script src="/static/script.js"></script>
-   
 </body>
 </html>
