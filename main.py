@@ -16,7 +16,9 @@ templates = Jinja2Templates(directory="templates")
 PLATFORM_URLS = {
     "github": "https://github.com/",
     "leetcode": "https://leetcode.com/u/",
-    "linkedin": "https://www.linkedin.com/in/"
+    "linkedin": "https://www.linkedin.com/in/",
+    "instagram": "https://www.instagram.com/",
+    "youtube": "https://www.youtube.com/@"
 }
 
 @app.get("/", response_class=HTMLResponse)
@@ -27,9 +29,10 @@ async def read_home(request: Request, username: Optional[str] = None, platform: 
     if username and platform:
         base_url = PLATFORM_URLS.get(platform.lower())
         if base_url:
-            generated_link = f"{base_url}{username}"
+            # We strip whitespace just in case of typos
+            generated_link = f"{base_url}{username.strip()}"
 
-    # Use the modern Keyword Argument syntax
+    # Modern Keyword Argument syntax to avoid "unhashable dict" error
     return templates.TemplateResponse(
         request=request,
         name="index.html",
