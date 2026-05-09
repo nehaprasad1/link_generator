@@ -1,3 +1,4 @@
+#note : I made this to learn how to dockerize app
 # 🔗 Pixel Link Generator (Dockerized FastAPI)
 
 A production-ready, containerized web application built with **FastAPI** and **Docker**. This project demonstrates a complete **CI/CD** pipeline from local development to cloud deployment using a "Triple Threat" workflow: GitHub → Docker Hub → Render.
